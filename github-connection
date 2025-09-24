@@ -1,0 +1,51 @@
+To connect to your personal github account, you need to do so over SSH. Using classical tokens, or fine-grained tokens could cause potential balding.
+
+-1 ssh-keygen -t ed25519 -C "email-registered-with-github"
+You're going to be prompted to give the file a name to save the generated ssh key, you can using the default by just using ```Enter``` button
+
+-2 After that run these series of commnads:
+    ```bash
+    cd ~/.ssh; ls
+    ```
+    You should see the the name of the file that the generated key was saved to and a ```.pub``` file with the same name
+    ```bash
+    known_hosts saved-file saved-file.pub
+    ```
+
+    Copy the contents of the .pub file as it contains the public key file 
+    ```bash
+    cat saved-file.pub | pbcopy
+    ```
+    Now you have the contents of the file in your clipboard
+
+
+-3 Open your github account, and go to: ```Settings->SSH and GPG Keys```. And click on ```Add new ssh key```
+   Hit ```Cmd + V``` and continue. Now github knows that whenever we connect, it can authenticate us based on the provided key 
+
+
+-4  In your terminal, run the follwing commands:
+    ```bash
+    cd ~/.ssh
+    touch config
+    vim config
+    ```
+
+    And then paste the following:
+      Host github.com-your-user-name
+        HostName ssh.github.com 
+        User git 
+        IdentityFile ~/.ssh/saved-file
+
+-5 And then for your repository, you'll need to change the protocol to use ssh instead of HTTPS
+  ```bash
+  git remote set-url origin git@github.com-<username>:<username>/repo.git
+  ```
+  Now any operations done on this repository will be over SSH
+
+-6 The last step is to test the connection
+  ```bash 
+  ssh -vvvT git@github.com-username
+  ```
+  You will be prompted to keep the connection with github, and enter yes
+  This just prints out processes to the terminal for debugging clues such as dropped packets or errors, but regardless, you sould see:
+  "Hi username! You have been successfully authenticated"

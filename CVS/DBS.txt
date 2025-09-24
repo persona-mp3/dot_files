@@ -1,0 +1,72 @@
+Behavourial interview questions
+
+*************************************
+		 Tell me about yourself 
+*************************************
+
+
+*************************************
+				 LEADERSHIP 
+*************************************
+Okay the first time I led a project during the placement. Because it was kind of a new thing,
+usually, I'd always worked on my own, and not within a team. My team was tasked with building 
+an application, that takes in user-data and saves them, and presenting it as a demo towards the deadline.
+I think, it was about a month or so. Now, I was the only person who had experience with backend-technology and 
+web-based, while the others had most experience with front-end technologies. So I had a full-stack overview. I 
+noticed this diversity in skillsets, and decided to talk to the team, about what frameworks they'd like to use, 
+and how we can design a system first before we even staert coding. So we brainstormed lots of ideas together, and 
+planned out the stages of development we were going to task out. For example, data requirements, lts version of 
+tech and more. I also took more intiative by presenting my team during stadndups. I was like in a micro-team inside a macro-team 
+and I got to represent mine. Because I was able to communicate with the front-end devs, lead and help on some 
+major issues, we were able to meet the deadline earlier, and perform beyond what was expected. And when we got to present the 
+demo, we got postiive feedback from all technical/non-technical stakeholders.
+
+
+
+*************************************
+				 RESILENCE/SUCESS/FAILURES
+*************************************
+ TELL Me about a time you demonstrated resilence/best project
+ Tell me about your proudest accomplishement and how it took to get there
+
+
+Other times where I took the initiative was when I was working on larger team, on a refactor project, I noticed that 
+all the tests were failing except the ones I had written in a previous state. And someone on the team had also done major 
+changes too, so everything was imploding on itself. I raised it to the project-lead to let him know what I spotted and I was 
+working on it. I was able to speed-up development time for the group by spotting these case failures and got assigned to authoring 
+merge requests along side the project-lead
+Well, I would say there have been 2 latest accomplishements I can say, I'm proud of, because of what it thought me 
+and how it helped others. Alluding back to the failing tests, it was a rough batch. I had picked my ticket for developing 
+a new feature, I had finished it couple hours, about 16ish after picking it up. And I was just about to write some tests,
+and at first-try, i expect everything to fail right, because I've added something new. But even after I had recitified my changes 
+the tests kept failing. And I was stuck between "letting the owner of this test-case" do it themseleves, or "I just do it myself"
+So I had to go through previous stages to check the what changed, and when I did that, all tests still failed, even before I added mine.
+And then for about 3hrs, between reading code, and documentation for the testing framework, I was able to spot major issues in 
+the test-cases provided. If there were 22 tests, 12 were failing that was excluding mines. And until I was able to finish it and let 
+the projent lead know about this war going on my screen, I had continued trying, asking teammates questions and learning new things. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--- IF FEELING FUNKY, YOU COULD INCLUDE WSL-PRT
+
+*************************************
+				 TEAMWORK >> LEADERSHIP
+*************************************
+
+
+- Influence
+- Ethical/Moral
+
+
+-- USING STAR METHOD
