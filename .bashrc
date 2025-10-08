@@ -1,4 +1,4 @@
-alias nvim=$HOME/nvim-macos-arm64/bin/nvim
+# alias nvim=$HOME/nvim-macos-arm64/bin/nvim
 PS1='\W -> '
 name="Archive"
 nline=$'\n'
@@ -24,11 +24,33 @@ projects(){
 	cd $HOME/Desktop/projects
 }
 
+branch(){
+	target=$(git branch | sed 's/* //' | fzf --height=40% --margin=20% --border)
+	if [ $? -ne 0 ]; then
+		echo "fzf exited with $?"
+		return $?
+	fi
+	if [[ -z $target ]]; then
+		echo "no branch selected"
+		return $?
+	fi
 
- export PATH=$PATH:~/.local/go/bin
- export PATH=$PATH:~/.local/bin
+	cmd=$(git switch $target)
+	return
+}
+
+
+
+
+export PATH=$PATH:~/.local/go/bin
+export PATH=$PATH:~/.local/bin
 
 alias yogit=$HOME/yogit2/main
+alias ga="git add ."
+alias gs="git status"
+alias vim="nvim"
+alias vv="nvim ~/.config/nvim"
+alias vb="vim ~/.bashrc"
 
 export TERM="xterm-256color"
 export PATH="$HOME/.local/bin:$PATH"
@@ -41,9 +63,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-
-
-
+nvm use 21.1.0
 
 
 # ============= casa config for playwright
@@ -53,3 +73,13 @@ export REQUEST_CA_BUNDLE=/etc/ssl/certs/ca-certs.pem
 
 #to use c++17 compiler
 alias g++="g++ -std=c++20"
+
+
+alias ff="fzf --style full --preview 'fzf-preview.sh {}' --bind 'focus:transform-header:file --brief {}'"
+#alias ff="fzf --preview 'fzf-preview.sh {}' --height 90%  --border"
+alias reload="source ~/.bashrc && clear"
+
+export HOMEBREW_NO_AUTO_UPDATE=1
+
+
+
