@@ -3,7 +3,6 @@ set relativenumber
 colorscheme slate
 set tabstop=2
 set shiftwidth=2
-
 set laststatus=2
 set noshowmode
 set statusline=
