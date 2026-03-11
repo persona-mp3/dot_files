@@ -1,12 +1,12 @@
 export ZSH="$HOME/.oh-my-zsh"
-for f in ~/config-files/*.sh; do source "$f"; done
+# for f in ~/config-files/*.sh; do source "$f"; done
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
+#
+# plugins=(git)
 
-plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -99,6 +99,17 @@ function parse_git_branch() {
 
 COLOR_DEF=$'%f'
 COLOR_DIR=$'%F{260}'
-COLOR_GIT=$'%F{110}'
+COLOR_GIT=$'%F{245}'
+COLOR_PIPE=$'%F{9}'
 setopt PROMPT_SUBST
-export PROMPT='${COLOR_DIR} %2~ ${COLOR_GIT}$(parse_git_branch)${COLOR_DEF}  '
+export PROMPT=' ${COLOR_DIR}%2~ ${COLOR_GIT}$(parse_git_branch)${COLOR_PIPE} |${COLOR_DEF} '
+
+# . "$HOME/.local/bin/env"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/zlib/lib/pkgconfig"
+export LDFLAGS="-L/opt/homebrew/opt/zlib/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/zlib/include"
+# export PKG_CONFIG_PATH="$(brew --prefix)/lib/pkgconfig:$(brew --prefix)/opt/zlib/lib/
+# pkgconfig:$(brew --prefix)/opt/libpng/lib/pkgconfig:$(brew --prefix)/opt/freetype/lib/pkgconfig"
+# uv add manim
+
+export PKG_CONFIG_PATH="$(brew --prefix)/opt/bzip2/lib/pkgconfig:$(brew --prefix)/opt/expat/lib/pkgconfig:$(brew --prefix)/opt/zlib/lib/pkgconfig:$(brew --prefix)/lib/pkgconfig"
