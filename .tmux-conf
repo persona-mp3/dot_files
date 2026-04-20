@@ -1,0 +1,21 @@
+# Status bar position
+set -g status-position bottom
+
+# Keep default status bar colors (black bg, green/white text)
+set -g status-style 'bg=black fg=green'
+
+# Regular windows — default look, with extra padding around the name
+set -g window-status-format ' #W '
+
+# Active window — highlighted with reverse video (standout), extra padding
+set -g window-status-current-format ' #I:  #W  '
+set -g window-status-current-style 'bg=green fg=black bold'
+
+# Allow window names to grow as long as needed without truncation
+set -g window-status-separator ' | '
+setw -g automatic-rename off
+set -g status-left-length 200
+set -g status-right-length 200
+
+set -g status-right-length 200
+set -g status-right '#{pane_current_path}'
