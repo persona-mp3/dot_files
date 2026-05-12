@@ -10,6 +10,7 @@ vim.keymap.set('n', '<leader>qq', ':qa!<CR>')
 -- BUFFER OPERATIONS
 vim.keymap.set('n', '<leader>x', ':bdelete<CR>')
 vim.keymap.set('n', '<Tab>', ':bn<CR>')
+vim.keymap.set({ "n", "i", "v" }, "<C-c>", "<Esc>")
 
 
 -- escape from terminal to normal mode

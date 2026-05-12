@@ -19,10 +19,18 @@ return {
 				lualine_c = {},
 				lualine_x = {
 					"diagnostics",
-					{ "fileformat", symbols = { unix = "  Fedora  ", mac = "", dos = "" } },
+					{ "fileformat", symbols = { unix = "  unix  ", mac = "", dos = "" } },
 				},
 				lualine_y = { "lsp_status" }, -- was 'progress' by default
-				lualine_z = {},
+				lualine_z = {
+					{
+						function()
+							return os.date("%H:%M")
+						end,
+						color = { bg = "NONE", fg="#4d7d80" },
+					}
+
+				},
 			},
 		})
 	end

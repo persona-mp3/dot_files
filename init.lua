@@ -8,6 +8,8 @@ vim.opt.shiftwidth = 2
 vim.opt.swapfile = false
 vim.opt.winborder = "rounded"
 vim.opt.smartindent = true
+vim.opt.mouse = ""
+-- vim.opt.termguicolors = false  -- use terminal's 16 colors instead of 24-bit
 
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -31,9 +33,10 @@ require("lazy").setup("plugins")
 
 require("config.keymaps")
 require("config.floating_terminal")
-require("config.custom_terminal_mode")
+-- require("config.custom_terminal_mode")
+-- require("config.autoscheme_changer")
 
-vim.cmd.colorscheme("retrobox")
+-- vim.cmd.colorscheme("retrobox")
 
 -- AUTOCOMMANDS
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -69,3 +72,4 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 
 vim.keymap.set('n', '<leader>fm', vim.lsp.buf.format)
+vim.keymap.set('n', '<leader>g', require('git-float').toggle, { desc = 'Toggle Git Terminal' })

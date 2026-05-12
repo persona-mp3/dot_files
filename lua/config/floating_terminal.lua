@@ -23,7 +23,7 @@ local function create_float()
 		title_pos = "center",
 	})
 
-	vim.api.nvim_set_option_value("winblend", 10, { win = win })
+	vim.api.nvim_set_option_value("winblend", 5, { win = win })
 	vim.api.nvim_set_option_value("winhighlight", "Normal:NormalFloat", { win = win })
 
 	vim.fn.termopen(vim.o.shell)
@@ -60,7 +60,7 @@ local function toggle_terminal()
 			title_pos = "center",
 		})
 
-		vim.api.nvim_set_option_value("winblend", 8, { win = state.win })
+		vim.api.nvim_set_option_value("winblend", 5, { win = state.win })
 		vim.api.nvim_set_option_value("winhighlight", "Normal:NormalFloat", { win = state.win })
 		vim.cmd("startinsert")
 		return

@@ -16,7 +16,7 @@ return {
 				},
 				automatic_enable = {
 					"lua_ls", "gopls", "rust_analyzer", "clangd",
-					"jdtls", "html", "vtsls", "basedpyright",
+					"jdtls", "html", "vtsls", "basedpyright", "intellij-server"
 				}
 			})
 
