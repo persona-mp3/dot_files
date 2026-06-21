@@ -103,6 +103,18 @@
    go
    rustc
    cargo 
+
+   libreoffice-qt
+   hunspell
+   hunspellDicts.uk_UA
+   hunspellDicts.th_TH
+
+   vscodium
+   grim
+  
+   rustfmt
+   clippy
+   rust-analyzer
   ];
 
    programs.hyprland.enable = true;
@@ -123,5 +135,23 @@
   # recommended to leave this value at the release version of the first install of this system. Before changing this value read the documentation for this option (e.g. man configuration.nix or 
   # on https://nixos.org/nixos/options.html).
   system.stateVersion = "26.05"; # Did you read the comment?
+
+
+  programs.obs-studio = {
+	enable = true;
+	plugins = with pkgs.obs-studio-plugins; [
+		obs-pipewire-audio-capture 
+	#	wlrobs
+	];
+  };
+
+  boot.kernelModules = ["v4l2loopback"];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+
+
+  programs.vim = {
+	  enable = true;
+	  defaultEditor = true;
+  };
 
 }
