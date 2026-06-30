@@ -9,7 +9,15 @@ vim.opt.swapfile = false
 vim.opt.winborder = "rounded"
 vim.opt.smartindent = true
 vim.opt.mouse = ""
--- vim.opt.termguicolors = false  -- use terminal's 16 colors instead of 24-bit
+
+-- infinite undo
+vim.opt.undofile = true
+
+-- Neat X clipboard integration
+-- <leader>p will paste clipboard into buffer
+-- <leader>c will copy entire buffer into clipboard
+vim.keymap.set('n', '<leader>p', '<cmd>read !wl-paste<cr>')
+vim.keymap.set('n', '<leader>c', '<cmd>w !wl-copy<cr><cr>')
 
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -35,8 +43,17 @@ require("config.keymaps")
 require("config.floating_terminal")
 -- require("config.custom_terminal_mode")
 -- require("config.autoscheme_changer")
+-- vim.lsp.config.rust_analyzer.setup({
+-- 	cmd = {"rust-analyzer"}
+-- })
+vim.lsp.enable("rust_analyzer", {
+})
 
--- vim.cmd.colorscheme("retrobox")
+vim.keymap.set("n", "<leader>gl", function()
+    vim.cmd("write")
+    vim.cmd("cexpr system('golangci-lint run --disable-all --enable exhaustruct --out-format line-number ./...')")
+    vim.cmd("copen")
+end, { desc = "Run exhaustruct only" })
 
 -- AUTOCOMMANDS
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -72,4 +89,5 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 
 vim.keymap.set('n', '<leader>fm', vim.lsp.buf.format)
-vim.keymap.set('n', '<leader>g', require('git-float').toggle, { desc = 'Toggle Git Terminal' })
+vim.cmd.colorscheme("base16-gruvbox-dark-hard")
+vim.opt.colorcolumn = "85"
