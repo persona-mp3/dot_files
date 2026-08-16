@@ -59,7 +59,7 @@
   # Enable touchpad support (enabled default in most desktopManager). services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users."daniel" = { isNormalUser = true; description = "daniel"; extraGroups = [ "networkmanager" "wheel" ]; packages = with pkgs; [
+  users.users."daniel" = { isNormalUser = true; description = "daniel"; extraGroups = [ "networkmanager" "wheel" "docker" ]; packages = with pkgs; [
       kdePackages.kate
     #  thunderbird
     ];
@@ -83,6 +83,7 @@
     nodejs_22 
     wget 
     jdk21
+		maven
 
     fish
     ripgrep
@@ -109,12 +110,21 @@
    hunspellDicts.uk_UA
    hunspellDicts.th_TH
 
-   vscodium
    grim
   
    rustfmt
    clippy
    rust-analyzer
+
+	 pandoc
+
+	 zip
+	 unzip
+
+	texlive.combined.scheme-medium
+  jq
+
+	claude-code
   ];
 
    programs.hyprland.enable = true;
@@ -154,4 +164,11 @@
 	  defaultEditor = true;
   };
 
+	virtualisation.docker = {
+		enable = true;
+	};
+
+
+	# users.users.daniel.extraGroups = [ "docker" ];
 }
+
