@@ -3,6 +3,62 @@
 
 { config, pkgs, ... }:
 
+let
+  sf-mono = pkgs.stdenv.mkDerivation rec {
+    pname = "sf-mono";
+    version = "1";
+
+    src = pkgs.fetchurl {
+      url = "https://devimages-cdn.apple.com/design/resources/download/SF-Mono.dmg";
+			sha256 = "sha256-bUoLeOOqzQb5E/ZCzq0cfbSvNO1IhW1xcaLgtV2aeUU=";
+
+    };
+
+	
+		nativeBuildInputs = [ pkgs.p7zip pkgs.cpio pkgs.gzip ];
+
+
+    # unpackPhase = ''
+    #   7z x $src
+    #   cd "SFMonoFonts"
+    #   7z x "SF Mono Fonts.pkg" -opkg-extracted
+    #   cd pkg-extracted
+    #   if [ -f Payload ]; then
+    #     cat Payload | gunzip -dc | cpio -id
+    #   fi
+    #   cd ../..
+    #   find . -iname "*.otf" -o -iname "*.ttf"
+    # '';
+    #
+    # installPhase = ''
+    #   mkdir -p $out/share/fonts/opentype
+    #   find . -iname "*.otf" -exec cp {} $out/share/fonts/opentype/ \;
+    #   find . -iname "*.ttf" -exec cp {} $out/share/fonts/opentype/ \;
+    # '';
+
+
+
+		unpackPhase = ''
+      7z x $src
+      cd "SFMonoFonts"
+      7z x "SF Mono Fonts.pkg" -opkg-extracted
+      cd pkg-extracted
+      PAYLOAD=$(find . -name "Payload" | head -1)
+      echo "Found payload at: $PAYLOAD"
+      if [ -n "$PAYLOAD" ]; then
+        cat "$PAYLOAD" | gunzip -dc | cpio -idm
+      fi
+      cd ../..
+      find . -iname "*.otf" -o -iname "*.ttf"
+    '';
+
+    installPhase = ''
+      mkdir -p $out/share/fonts/opentype
+      find . -iname "*.otf" -exec cp {} $out/share/fonts/opentype/ \;
+      find . -iname "*.ttf" -exec cp {} $out/share/fonts/opentype/ \;
+    '';
+  };
+in
 { imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix ];
@@ -170,5 +226,5 @@
 
 
 	# users.users.daniel.extraGroups = [ "docker" ];
+	fonts.packages = [ sf-mono ];
 }
-
