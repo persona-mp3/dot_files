@@ -1,23 +1,34 @@
 [font]
-bold = { family = "monospace", style = "Regular" }
-italic = { family = "monospace", style = "Regular" }
-bold_italic = { family = "monospace", style = "Regular" }
+size = 21.0
+
+[font.normal]
+family = "Liga SFMono Nerd Font"
+style = "Medium"
+
+[font.bold]
+family = "Liga SFMono Nerd Font"
+style = "Medium"
+
+[font.italic]
+family = "Liga SFMono Nerd Font"
+style = "Medium"
 
 [window]
-decorations = "None"
+decorations = "none"
 padding.x = 0
 padding.y = 0
 dynamic_padding = true
-opacity=0.96
 startup_mode = "Fullscreen"
 
-
-#
 [general]
 import = [
-    # "~/.config/alacritty/themes/themes/vague.toml"
-		"vague.toml"
+    "~/.config/alacritty/themes/themes/goggle.toml",
 ]
+
+[terminal]
+# current path of fish to make sure alacritty runs fish by default
+shell = "/run/current-system/sw/bin/fish"
 
 [env]
 TERM = "xterm-256color"
+
