@@ -9,6 +9,20 @@ return {
 	{
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
+			vim.lsp.config("jdtls", {
+				-- settings = {
+				-- 	java = {
+				-- 		format = {
+				-- 			enabled = true,
+				-- 			settings = {
+				-- 				url = vim.fn.expand("~/.config/nvim/java-formatter.xml"),
+				-- 				profile = "NvimJava",
+				-- 			},
+				-- 		},
+				-- 	},
+				-- },
+			})
+
 			require("mason-lspconfig").setup({
 				ensure_installed = {
 					"lua_ls", "gopls", "clangd",

@@ -22,7 +22,8 @@ startup_mode = "Fullscreen"
 
 [general]
 import = [
-    "~/.config/alacritty/themes/themes/goggle.toml",
+    # "~/.config/alacritty/themes/themes/goggle.toml",
+    # "~/.config/alacritty/vague.toml",
 ]
 
 [terminal]
@@ -31,4 +32,3 @@ shell = "/run/current-system/sw/bin/fish"
 
 [env]
 TERM = "xterm-256color"
-

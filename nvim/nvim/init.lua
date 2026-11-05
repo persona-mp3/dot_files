@@ -9,15 +9,16 @@ vim.opt.swapfile = false
 vim.opt.winborder = "rounded"
 vim.opt.smartindent = true
 vim.opt.mouse = ""
-
--- infinite undo
+vim.opt.colorcolumn = "80"
 vim.opt.undofile = true
-
--- Neat X clipboard integration
--- <leader>p will paste clipboard into buffer
--- <leader>c will copy entire buffer into clipboard
 vim.keymap.set('n', '<leader>p', '<cmd>read !wl-paste<cr>')
 vim.keymap.set('n', '<leader>c', '<cmd>w !wl-copy<cr><cr>')
+vim.keymap.set('n', '<leader>fm', vim.lsp.buf.format)
+vim.keymap.set("n", "<C-k>", "<cmd>terminal <cr>")
+
+-- to replicate jon's config, not sure if i like it yet
+vim.cmd("highlight LineNr guibg=#282c34")
+vim.cmd("highlight SignColumn guibg=#282c34")
 
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -89,13 +90,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 
 -- adhoc updates
-vim.keymap.set('n', '<leader>fm', vim.lsp.buf.format)
-vim.keymap.set("n", "<C-k>", "<cmd>terminal <cr>")
-vim.opt.colorcolumn = "95"
--- to replicate jon's config, not sure if i like it yet
-vim.cmd("highlight LineNr guibg=#282c34")
-vim.cmd("highlight SignColumn guibg=#282c34")
-
 local todo_group = vim.api.nvim_create_augroup("CustomTodo", { clear= true })
 vim.api.nvim_create_autocmd("FileType", {
 	group = todo_group,
@@ -103,4 +97,48 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function()
 		vim.fn.matchadd("Todo", [[\<\(REVIEW\|CURRENTLY\|TASK\|UPDATE\)\>]])
 	end
+})
+
+
+-- temporary highlight line i hit zz
+vim.keymap.set('n', 'zz', function()
+    vim.cmd('normal! zz')
+    local was_on = vim.wo.cursorline
+    vim.wo.cursorline = true
+    vim.defer_fn(function()
+        if not was_on then
+            vim.wo.cursorline = false
+        end
+    end, 900)
+end)    
+
+
+-- allows go to add // for next line automagically
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "go",
+  callback = function()
+    -- Append 'r' to formatoptions to auto-insert '//' on Enter
+    vim.opt_local.formatoptions:append("r")
+    
+    -- Optional: Append 'o' to auto-insert '//' when using 'o' or 'O' in Normal mode
+    vim.opt_local.formatoptions:append("o")
+  end,
+})
+
+vim.cmd("colorscheme base16-circus")
+vim.cmd("highlight LineNr guibg=#282c34")
+vim.cmd("highlight SignColumn guibg=#282c34")
+
+
+vim.api.nvim_create_autocmd('InsertCharPre', {
+  callback = function()
+    if vim.v.char == '/' then
+      vim.schedule(function()
+        if vim.fn.mode() == 'i' and vim.fn.pumvisible() == 0 then
+          vim.api.nvim_feedkeys(
+            vim.api.nvim_replace_termcodes('<C-x><C-f>', true, false, true), 'n', false)
+        end
+      end)
+    end
+  end,
 })
