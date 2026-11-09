@@ -18,6 +18,7 @@ alias va="cd ~/.config/alacritty && nvim alacritty.toml "
 alias vt="nvim ~/.tmux.conf"
 alias ap="cd ~/apprentice-work"
 
+# ----------------- Git commands --------------------
 alias ginit="git init && touch .gitignore && git status"
 alias gs="git status"
 alias ga="git add ."
@@ -28,23 +29,29 @@ alias cb="git checkout -b"
 alias restore="git restore"
 alias remote="git remote"
 
-# function restore
-# 	git restore $argv[1]
-# end
-
-# function remote
-# 	git remote $argv[1]
-# end
-
+# stash commands
+alias stash="git stash"
+alias spop="git stash pop"
+alias drop="git stash drop"
+alias sl="git stash list"
 
 
 function fish_prompt
-    echo -n "  "
+	set_color brblack
+	echo -n "["(date "+%H:%M")"] "
 
     set parent_dir (basename (dirname $PWD))
-    set current_dir (basename $PWD)
 
-		echo "parent_dir:: $parent_dir"
+		# avoid showing username
+		if [ "$parent_dir" = "daniel" ]
+			set parent_dir "nixos"
+		end
+
+    set current_dir (basename $PWD)
+		if [ "$current_dir" = "daniel" ]
+			set current_dir "nixos"
+		end
+
     # Path
     set_color blue
     echo -n "$parent_dir::$current_dir"
@@ -69,6 +76,7 @@ function fish_prompt
     echo -n " | "
 
     set_color normal
+
 end
 
 function brancher
@@ -95,25 +103,8 @@ set __fish_git_prompt_showupstream 'none'
 set -g fish_prompt_pwd_dir_length 3
 
 
-function fish_prompt
-	set_color brblack
-	echo -n "["(date "+%H:%M")"] "
-	set_color blue
-	echo -n (command -q hostname; and hostname; or hostnamectl hostname)
-	if [ $PWD != $HOME ]
-		set_color brblack
-		echo -n '::'
-		set_color blue
-		echo -n (basename $PWD)
-	end
-	set_color brblack
-	printf '%s ' (__fish_git_prompt)
-	set_color brblack
-	echo -n '| '
-	set_color normal
-end
 
-
+# stolen from jon's config
 function fish_greeting
 	echo
 	echo -e (uname -ro | awk '{print " \\\\e[1mOS: \\\\e[0;32m"$0"\\\\e[0m"}')
