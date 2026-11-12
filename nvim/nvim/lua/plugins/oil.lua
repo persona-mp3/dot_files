@@ -7,8 +7,8 @@ return {
 				default_file_explorer = true,
 				columns = { "icon" },
 				float = {
-					max_width = 0.7,
-					max_height = 0.7,
+					max_width = 0.9,
+					max_height = 0.9,
 					preview_split = "right",
 
 				},

@@ -26,6 +26,27 @@ return {
 				}
 			})
 
+			local actions = require("telescope.actions")
+			local action_state = require("telescope.actions.state")
+
+			local function select_and_flash(prompt_bufnr)
+				actions.select_default(prompt_bufnr)
+				local was_on = vim.wo.cursorline
+				vim.wo.cursorline = true
+				vim.defer_fn(function()
+					if not was_on then vim.wo.cursorline = false end
+				end, 900)
+			end
+
+			telescope.setup({
+				defaults = {
+					mappings = {
+						i = { ["<CR>"] = select_and_flash },
+						n = { ["<CR>"] = select_and_flash },
+					}
+				}
+			})
+
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
 			vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Run through buffers in telelscope" })

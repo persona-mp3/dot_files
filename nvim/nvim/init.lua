@@ -100,9 +100,9 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 
--- temporary highlight line i hit zz
-vim.keymap.set('n', 'zz', function()
-    vim.cmd('normal! zz')
+-- temporary highlight line on scroll/center keys
+local function flash_cursorline(motion)
+    vim.cmd('normal! ' .. motion)
     local was_on = vim.wo.cursorline
     vim.wo.cursorline = true
     vim.defer_fn(function()
@@ -110,7 +110,12 @@ vim.keymap.set('n', 'zz', function()
             vim.wo.cursorline = false
         end
     end, 900)
-end)    
+end
+
+vim.keymap.set('n', 'zz',     function() flash_cursorline('zz') end)
+vim.keymap.set('n', 'zt',     function() flash_cursorline('zt') end)
+vim.keymap.set('n', '<C-d>',  function() flash_cursorline('\x04') end)
+vim.keymap.set('n', '<C-u>',  function() flash_cursorline('\x15') end)
 
 
 -- allows go to add // for next line automagically
@@ -125,7 +130,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-vim.cmd("colorscheme base16-circus")
+vim.cmd("colorscheme wryan")
 vim.cmd("highlight LineNr guibg=#282c34")
 vim.cmd("highlight SignColumn guibg=#282c34")
 
@@ -142,3 +147,4 @@ vim.api.nvim_create_autocmd('InsertCharPre', {
     end
   end,
 })
+
